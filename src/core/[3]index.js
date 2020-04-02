@@ -27,7 +27,7 @@ async function updateIframeContent({build, directory, view} = {}) {
 
   await sleep(500);
 
-  fetch(`${buildData}/${directoryData}/${compactData ? 'compact/' : ''}${viewData}.html`).then(response => {
+  fetch(`preview/${buildData}/${directoryData}/${compactData ? 'compact/' : ''}${viewData}.html`).then(response => {
 
     if (response.status !== 200) return Promise.reject();
 

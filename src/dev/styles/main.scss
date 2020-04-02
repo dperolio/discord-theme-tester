@@ -489,8 +489,10 @@ body {
   justify-content: center;
   margin: calc(var(--main-nav-height) + 20px) 20px 20px;
   transition: margin 0s;
-  @at-root .iframe-didnt-load & {
-    opacity: 0;
+  iframe {
+    @at-root .iframe-didnt-load & {
+      opacity: 0;
+    }
   }
   @at-root .main-nav-hidden & {
     margin: 0;

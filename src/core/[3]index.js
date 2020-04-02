@@ -43,6 +43,18 @@ async function updateIframeContent({build, directory, view} = {}) {
 
     iframe.contentWindow.document.body = doc.body;
 
+    // Prevent links in the iframe from being clicked
+    let links = iframe.contentWindow.document.querySelectorAll('a');
+
+    for (let link of links) {
+      link.addEventListener('click', preventIframeLinks);
+    }
+
+    function preventIframeLinks(e) {
+      e.preventDefault();
+    }
+    ////////////////////////////////
+
     discordDarkSidebar();
 
     await sleep(500);

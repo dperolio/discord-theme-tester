@@ -12,7 +12,7 @@ async function updateIframeContent({build, directory, view} = {}) {
 
   if (build) {
     iframe.dataset.build = build;
-    iframe.contentWindow.document.querySelector('#discord-css').href = `/preview/${build}/default.css`;
+    iframe.contentWindow.document.querySelector('#discord-css').href = `preview/${build}/default.css`;
     console.log(iframe.contentWindow.document.querySelector('#discord-css').href);
   }
   if (directory) iframe.dataset.directory = directory;
@@ -27,7 +27,7 @@ async function updateIframeContent({build, directory, view} = {}) {
 
   await sleep(500);
 
-  fetch(`/preview/${buildData}/${directoryData}/${compactData ? 'compact/' : ''}${viewData}.html`).then(response => {
+  fetch(`preview/${buildData}/${directoryData}/${compactData ? 'compact/' : ''}${viewData}.html`).then(response => {
 
     if (response.status !== 200) return Promise.reject();
 

@@ -1,0 +1,353 @@
+/// ==========================================================================
+/// Mixins
+/// ==========================================================================
+
+
+@mixin get-props($map, $keys...) {
+  $new-map: map-deep-get($map, $keys...);
+  $path: ();
+  @each $key in $keys {
+    $path: $path + '#{$key}-';
+  }
+  @each $p, $v in $new-map {
+    @if type-of($v) != 'map' {
+      #{$p}: var(--#{$path}#{$p}) !important;
+    } @else if index($pseudo-classes, $p) {
+      &:#{$p} {
+        @each $prop, $value in $v {
+          #{$prop}: var(--#{$path}#{$p}-#{$prop}) !important;
+        }
+      }
+    } @else if index($pseudo-elements, $p){
+      &::#{$p} {
+        @each $prop, $value in $v {
+          #{$prop}: var(--#{$path}#{$p}-#{$prop}) !important;
+        }
+      }
+    }
+  }
+}
+
+
+// Used specifically with `utilities/_components.scss`
+@mixin component($component: 'component', $path...) {
+  @if index($path, 'base') {
+    @include get-props($components, $component);
+    @include get-props($components, $component, #{nth($path, index($path, 'base') - 1)});
+  } @else {
+    @include get-props($components, $component, $path...);
+  }
+}
+
+
+@mixin generate-css-vars($map, $path: null) {
+  @each $k, $v in $map {
+    $p: if($path, #{$path}-#{$k}, $k);
+    @if type-of($v) == map {
+      @include generate-css-vars($v, $p);
+    }
+    @else {
+      --#{$p}: #{$v};
+    }
+  }
+}
+
+
+/// Sets the `width` and `height` of the element in one statement.
+///
+/// @argument {number (with unit) | string} $width
+///
+/// @argument {number (with unit) | string} $height [$width]
+///
+/// @example scss
+///   .first-element {
+///     @include size(2em);
+///   }
+///
+///   // CSS Output
+///   .first-element {
+///     width: 2em;
+///     height: 2em;
+///   }
+///
+/// @example scss
+///   .second-element {
+///     @include size(auto, 10em);
+///   }
+///
+///   // CSS Output
+///   .second-element {
+///     width: auto;
+///     height: 10em;
+///   }
+///
+/// @require {function} _is-size
+@mixin size(
+  $width,
+  $height: $width
+) {
+  width: $width;
+  height: $height;
+}
+
+
+/// @name localize
+/// Translate `content` from English into each of the languages listed in the $languages map
+/// English key must exist in the $languages map
+///
+/// @example scss
+///   .foo {
+///     .bar {
+///       &::after {
+///         @include localize('I like pie');
+///       }
+///     }
+///   }
+///
+/// @output css
+///   :lang(bg) .foo .bar::after {
+///       content: 'аз обичам пай';
+///   }
+///   :lang(cs) .foo .bar::after {
+///       content: 'mám rád koláč';
+///   }
+///   :lang(da) .foo .bar::after {
+///       content: 'jeg kan godt lide tærte';
+///   }
+///   ...
+@mixin localize($key) {
+  @each $language, $l in $localize {
+    @at-root :lang(#{$language}) & {
+      content: localize('#{$language}.#{$key}');
+    }
+  }
+}
+
+
+
+/// Provides a concise, one-line method for setting an element’s positioning
+/// properties: `position`, `top`, `right`, `bottom` and `left`. Use a `null`
+/// value to “skip” an edge of the box.
+///
+/// @argument {string} $position
+///   A CSS position value.
+///
+/// @argument {list} $box-edge-values
+///   List of lengths; accepts CSS shorthand.
+///
+/// @example scss
+///   .element {
+///     @include position(relative, 0 null null 10em);
+///   }
+///
+///   // CSS Output
+///   .element {
+///     left: 10em;
+///     position: relative;
+///     top: 0;
+///   }
+///
+/// @example scss
+///   .element {
+///     @include position(absolute, 0);
+///   }
+///
+///   // CSS Output
+///   .element {
+///     position: absolute;
+///     top: 0;
+///     right: 0;
+///     bottom: 0;
+///     left: 0;
+///   }
+///
+/// @require {function} _unpack-shorthand
+///
+// @mixin position($position: null, $box-edge-values: null) {
+//   $list: ();
+//   @each $value in $box-edge-values {
+//     @if type-of($value) == string and str-index($value, '!important') == 1 {
+//       $list: set-nth($list, length($list), nth($list, length($list)) $value);
+//     }
+//     @else {
+//       $list: append($list, $value);
+//     }
+//   }
+  
+//   $box-edge-values: _unpack-shorthand($list);
+  
+//   $offsets: (
+//     top:    nth($box-edge-values, 1),
+//     right:  nth($box-edge-values, 2),
+//     bottom: nth($box-edge-values, 3),
+//     left:   nth($box-edge-values, 4),
+//   );
+  
+//   @if $position {
+//     position: $position;
+    
+//   }
+  
+//   @each $offset, $value in $offsets {
+//     #{$offset}: #{$value};
+//   }
+// }
+
+
+// Calling this img instead of image, because it is literally
+// used to remove the content of an img element
+@mixin remove-img {
+  content: var(--image-empty);
+}
+
+
+@mixin boxart($pseudo: null) {
+  @each $name, $id in $games {
+    @if not $pseudo {
+      &[style*='#{$id}'] {
+        background: asset-boxart('#{str-slugify($name)}.jpg') no-repeat center / cover !important;
+        border-radius: var(--boxart-border-radius) !important;
+      }
+    } @else {
+      &[style*='#{$id}']::#{$pseudo}{
+        background: asset-boxart('#{str-slugify($name)}.jpg') no-repeat center / cover !important;
+        border-radius: var(--boxart-border-radius) !important;
+      }
+    }
+  }
+}
+
+
+
+///  Limit maximum text lines
+///  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+@mixin max-lines($how-many-lines) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $how-many-lines;
+}
+
+
+
+///  Opposite direction mixin
+///  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+///  Returns the opposite direction of each direction in a list
+///  @param {List} $directions - List of initial directions
+///  @return {List} - List of opposite directions
+
+@function opposite-direction($directions) {
+  $opposite-directions: ();
+  $direction-map: (
+    'top':    'bottom',
+    'right':  'left',
+    'bottom': 'top',
+    'left':   'right',
+    'center': 'center',
+    'ltr':    'rtl',
+    'rtl':    'ltr'
+  );
+
+  @each $direction in $directions {
+    $direction: to-lower-case($direction);
+
+    @if map-has-key($direction-map, $direction) {
+      $opposite-directions: append($opposite-directions, unquote(map-get($direction-map, $direction)));
+    } @else {
+      @warn 'No opposite direction can be found for `#{$direction}`. Direction omitted.';
+    }
+  }
+
+  @return $opposite-directions;
+}
+
+
+///  Triangle helper mixin
+///  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+///  @param {Direction} $direction - Triangle direction, either `top`, `right`, `bottom` or `left`
+///  @param {Color} $color - Triangle color
+///  @param {Length} $size - Triangle size
+
+@mixin triangle($direction, $color: null, $size: null) {
+  $perpendicular-borders: $size solid transparent !important;
+
+  @include size(0);
+  content: '';
+  @if not index(top right bottom left, $direction) {
+    @error 'Direction must be either `top`, `right`, `bottom` or `left`.';
+  }
+  border-#{opposite-direction($direction)}: $size solid $color !important;
+
+  @if $direction == top or $direction == bottom {
+    border-left: $perpendicular-borders;
+    border-right: $perpendicular-borders;
+  } @else if $direction == right or $direction == left {
+    border-bottom: $perpendicular-borders;
+    border-top: $perpendicular-borders;
+  }
+}
+
+
+///  Masking mixin
+///  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+@mixin mask($image, $background-color: null, $size: null, $extras: no-repeat center, $important: false) {
+	@if ($important) {
+    -webkit-mask: $image $extras !important;
+    mask: $image $extras !important;
+    @if ($background-color) {
+      background-color: $background-color !important;
+    }
+    @if ($size) {
+      -webkit-mask-size: $size !important;
+      mask-size: $size !important;
+    }
+  } @else {
+    -webkit-mask: $image $extras;
+    mask: $image $extras;
+    @if ($background-color) {
+      background-color: $background-color;
+    }
+    @if ($size) {
+      -webkit-mask-size: $size;
+      mask-size: $size;
+    }
+  }
+}
+
+
+
+/// Ellipsis mixin
+/// ..........................................................................
+/// Truncates text and adds an ellipsis to represent overflow.
+///
+/// @argument {number} $max-width [100%]
+///   The `max-width` for the string to respect before being truncated.
+///
+/// @argument {string} $display [inline-block]
+///   Sets the display-value of the element.
+///
+/// @example scss
+///   .element {
+///     @include ellipsis;
+///   }
+///
+///   // CSS Output
+///   .element {
+///     display: inline-block;
+///     max-width: 100%;
+///     overflow: hidden;
+///     text-overflow: ellipsis;
+///     white-space: nowrap;
+///     word-wrap: normal;
+///   }
+/// .......................................................................... /
+
+@mixin ellipsis($max-width: null, $display: null) {
+  display: $display;
+  max-width: $max-width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: normal;
+  white-space: nowrap;
+}

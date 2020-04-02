@@ -1,0 +1,394 @@
+// main: _module.scss
+
+//** Functions
+
+@function map-merge-all($maps...) {
+  $map: ();
+
+  @each $m in $maps {
+    $map: map-merge($map, $m);
+  }
+  @return $map;
+}
+
+/// Map deep get
+/// @access public
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Key chain
+/// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+      $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+@function get($map, $path) {
+    $keys: ();
+    $separator: '.';
+    $index : str-index($path, $separator);
+
+    @while $index != null {
+        $item: str-slice($path, 1, $index - 1);
+        $keys: append($keys, $item);
+        $path: str-slice($path, $index + 1);
+        $index : str-index($path, $separator);
+    }
+
+    $keys: append($keys, $path);
+
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+
+    @return $map;
+}
+
+
+// Shorthand for `color` CSS custom properties
+// TODO: Needs improved to work with fallback values
+@function color($propertyName, $alpha: null) {
+  @if $alpha {
+    @return unquote('hsl(var(--color-#{$propertyName}), #{$alpha})');
+  }
+  @return unquote('hsl(var(--color-#{$propertyName}))');
+}
+
+
+
+// An alternative way to use CSS custom properties (vars)
+// This is mainly used in an attempt to try
+// to increase readability. You simply use var('[name]')
+// or var([name]) instead of var(--[name]), but leaving the
+// option to still use var(--[name])
+// var('[name]') is preferred as
+@function var($propertyName, $fallback: null) {
+  @if str-index($propertyName, '--') {
+    @if ($fallback) {
+      @return unquote('var(#{$propertyName)}, #{$fallback})');
+    }
+    @return unquote('var(#{$propertyName)})');
+  } @else {
+    @if ($fallback) {
+      @return var(--#{$propertyName}, #{$fallback});
+    }
+    @return var(--#{$propertyName});
+  }
+}
+
+@function option($option) {
+  @return '[data-tc-#{$option}]';
+}
+
+// Shorthand for icons
+@function icon($name, $fallback: null) {
+  @if($fallback) {
+    @return var(--icon-#{$name}, #{$fallback});
+  }
+  @return var(--icon-#{$name});
+}
+
+// Shorthand for misc SVG images
+@function misc($name, $fallback: null) {
+  @if($fallback) {
+    @return var(--misc-#{$name}, #{$fallback});
+  }
+  @return var(--misc-#{$name});
+}
+
+
+// Shorthand for logos
+@function logo($name, $fallback: null) {
+  @if($fallback) {
+    @return var(--logo-#{$name}, #{$fallback});
+  }
+  @return var(--logo-#{$name});
+}
+
+@function badge($name, $fallback: null) {
+  @if($fallback) {
+    @return var(--icon-#{$name}, #{$fallback});
+  }
+  @return var(--badge-#{$name});
+}
+
+
+@function get($map, $path) {
+    $keys: ();
+    $separator: '.';
+    $index : str-index($path, $separator);
+
+    @while $index != null {
+        $item: str-slice($path, 1, $index - 1);
+        $keys: append($keys, $item);
+        $path: str-slice($path, $index + 1);
+        $index : str-index($path, $separator);
+    }
+
+    $keys: append($keys, $path);
+
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
+
+// Class function
+@function classes($path) {
+    @return '.#{get($classes, $path)}';
+}
+// Id function
+@function id($path) {
+    @return '##{get($classes, $path)}';
+}
+// Localize function
+@function localize($path) {
+  @return '#{get($localize, $path)}';
+}
+// Discord Images function
+@function discordImages($path) {
+    @return '#{get($discordImages, $path)}';
+}
+
+
+
+// NTH-SELECTOR
+@function nth-selector($str, $n) {
+  @for $i from 1 through $n {
+    @if (str_index($str, ' ')) {
+      @if $i == $n {
+        $str: str_slice($str, 0, str_index($str, ' ') - 1);
+      } @else {
+        $str: str_slice($str, str_index($str, ' ') + 1);
+      }
+    }
+  }
+  @return unquote($str);
+}
+// INPUT:
+// grand-parent {
+//   .parent {
+//     content: '' + nth-selector(#{&}, 1);
+//
+//     #{nth-selector(#{&}, 2)} .cc {
+//       width: 20px;
+//     }
+//
+//     @at-root #{nth-selector(#{&}, 2)} .cc {
+//       width: 10px;
+//     }
+//   }
+// }
+//
+//OUTPUT:
+// .grand-parent .parent {
+//   content: ".grand-parent";
+// }
+//
+// .grand-parent .parent .parent .cc {
+//   width: 20px;
+// }
+//
+// .parent .cc {
+//   width: 10px;
+// }
+
+
+
+///  Base path for assets (fonts, images...),
+///  should not include trailing slash
+///
+///  @access public
+///  @type String
+///
+
+$asset-base-path: 'https://twitchcord.com/app/assets' !default;
+
+///  Asset URL builder
+///  ############################################
+///
+///  @access private
+///  @param {String} $type - Asset type, matching folder name
+///  @param {String} $file - Asset file name, including extension
+///  @return {URL} - A `url()` function leading to the asset
+///  @example scss
+///    background: asset('image', 'foo.jpg');
+///  @example css
+///    background: url('https://asset-base-path-url.com/image/foo.jpg');
+///
+
+@function asset($type, $file) {
+  @return url($asset-base-path + '/' + $type + '/' + $file);
+}
+
+
+
+///  Shorthand asset functions
+///  ############################################
+///  These functions create a shorthand access via the
+///  `asset` function for various commonly used assets.
+///
+///  @access public
+///  @param {String} $file - Asset file name, including extension
+///  @return {URL} - A `url()` function leading to the image
+///  @require {function} asset
+///
+
+@function asset-image($file) {
+  @return asset('images', $file);
+}
+@function image($type) {
+  @return var('image-#{$type}');
+}
+
+
+@function asset-font($file) {
+  @return asset('fonts', $file);
+}
+@function font($type) {
+  @return var('font-#{$type}');
+}
+
+
+@function asset-sound($file) {
+  @return asset('sounds', $file);
+}
+@function sound($type) {
+  @return var('sound-#{$type}');
+}
+
+
+@function asset-badge($file) {
+  @return asset('images/badges', $file);
+}
+@function badge($type) {
+  @return var('badge-#{$type}');
+}
+
+
+@function asset-boxart($file) {
+  @return asset('images/games/boxarts/280x385', $file);
+}
+
+
+
+// Helper function to replace ALL of a specific set of characters in a string
+@function str-replace-all($string, $replace-with, $search...) {
+  @each $e in $search {
+    @if str-index($replace-with, $e) {
+      @error 'You almost caused an infinite loop! Bad boy.' + \n
+             'Make sure what you\'re replacing with isn\'t contained in what you\'re replacing.';
+    }
+    @while str-index($string, $e) {
+      $index: str-index($string, $e);
+      $string: str-slice($string, 1, $index - 1) + $replace-with + str-slice($string, $index + str-length($e));
+    }
+  }
+  @return $string;
+}
+
+
+
+/// Slugify function
+/// @access public
+/// @param {String} $file - Asset file name, including extension
+/// @return {URL} - A `url()` function leading to the image
+/// @require {function} str-replace-all
+
+@function str-slugify($string) {
+  $string:  to_lower_case(
+              str-replace-all(
+                str-replace-all(
+                  str-replace-all($string, '',
+                    '.', ';', '/', '\\', '(',
+                    ')', '"', '\'', ':', ',',
+                    '<', '>', '~', '!', '@',
+                    '#', '$', '%', '^', '*',
+                    '|', '+', '=', '[', ']',
+                    '{', '}', '`', '?', '®',
+                    '²', '™'
+                  ), '-', '_', ' ', '---', '--'
+                ), 'and', '&'
+              )
+            );
+  @return $string;
+}
+
+
+
+//  Helper function to replace characters in a string
+@function str-replace($string, $search, $replace-with: '') {
+  $index: str-index($string, $search); 
+  @return if($index, 
+      str-slice($string, 1, $index - 1) + $replace-with + 
+      str-replace(str-slice($string, $index + 
+      str-length($search)), $search, $replace-with), 
+      $string); 
+}   
+
+
+
+@function non-destructive-map-merge($parent-map, $child-map) {
+  $result: $parent-map;
+  @each $key, $value in $child-map {
+    @if (not map-has-key($result, $key)) or (type-of(map-get($result, $key)) != type-of($value)) or (not (type-of(map-get($result, $key)) == map and type-of($value) == map)) {
+      $result: map-merge($result, ($key: $value));
+    }
+    @else {
+      $result: map-merge($result, ($key: non-destructive-map-merge(map-get($result, $key), $value)));
+    }
+  }
+  @return $result;
+}
+
+
+
+/// Base path for assets (fonts, images...),
+/// should not include trailing slash
+/// @access public
+/// @type String
+$svg-base-path: 'src/dev/styles/utilities/svg' !default;
+
+@function svg($type, $file) {
+  @if ($type != 'logo') and ($type != 'icon') and ($type != 'misc') {
+    @error 'Valid $type parameters for svg function are only \'logo\' and \'icon\' and \'misc\'';
+  }
+  @return #{inline-svg($svg-base-path + '/' + $type + '/' + $file)};
+}
+
+
+
+///
+///  _UNPACK-SHORTHAND
+///  ––––––––––––––––––––––––––––––––––––––––––––––––––
+///
+///  Transforms shorthand that can range from 1-to-4 values to be 4 values.
+///
+///  @author Bourbon
+///
+///  @argument {list} $shorthand
+///
+///  @example scss
+///    .element {
+///      margin: _unpack-shorthand(1em 2em);
+///    }
+///
+///    // CSS Output
+///    .element {
+///      margin: 1em 2em 1em 2em;
+///    }
+///
+///  @access private
+///
+
+// @function _unpack-shorthand($shorthand) {
+//   @if length($shorthand) == 1 {
+//     @return nth($shorthand, 1) nth($shorthand, 1) nth($shorthand, 1) nth($shorthand, 1);
+//   } @else if length($shorthand) == 2 {
+//     @return nth($shorthand, 1) nth($shorthand, 2) nth($shorthand, 1) nth($shorthand, 2);
+//   } @else if length($shorthand) == 3 {
+//     @return nth($shorthand, 1) nth($shorthand, 2) nth($shorthand, 3) nth($shorthand, 2);
+//   } @else {
+//     @return $shorthand;
+//   }
+// }

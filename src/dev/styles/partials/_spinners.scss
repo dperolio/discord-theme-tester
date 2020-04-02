@@ -1,0 +1,262 @@
+.loading-text {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  font-size: 30px;
+  font-weight: 500;
+  color: #fff;
+  text-transform: uppercase;
+  animation: fadeIn .5s alternate infinite;
+  @at-root .loading-iframe & {
+    // display: block;
+  }
+}
+
+// .progress-bar {
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   transition: none;
+//   transform: scaleX(0);
+//   transform-origin: top left;
+//   &-container {
+//     position: absolute;
+//     top: -4px;
+//     z-index: 1;
+//     display: block;
+//     width: 100%;
+//     height: 4px;
+//     overflow: hidden;
+//     opacity: 0;
+//     transition: opacity .25s cubic-bezier(.4,0,.6,1) 0ms,  transform .25s cubic-bezier(.4,0,.6,1) 0ms;
+//     transform: translateZ(0) scaleY(0);
+//     @at-root .loading-iframe & {
+//       opacity: 1;
+//       transform: translateZ(0) scaleY(1);
+//     }
+//   }
+//   &-buffer {
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//     background-color: #25262a;
+//     transition: transform .25s cubic-bezier(.4,0,.6,1) 0ms;
+//     transform-origin: top left;
+//     @at-root .light-mode & {
+//       background-color: #ececec;
+//     }
+//   }
+//   &-inner {
+//     position: absolute;
+//     display: inline-block;
+//     width: 100%;
+//     border: 4px solid color('primary-6');
+//   }
+//   &.primary {
+//     left: -145.166611%;
+//     animation: progress-bar-primary-translate 2s infinite linear;
+//     .progress-bar-inner {
+//       animation: progress-bar-primary-scale 2s infinite linear;
+//     }
+//   }
+//   &.secondary {
+//     left: -54.888891%;
+//     visibility: visible;
+//     animation: progress-bar-secondary-translate 2s infinite linear;
+//     .progress-bar-inner {
+//       animation: progress-bar-secondary-scale 2s infinite linear;
+//     }
+//   }
+// }
+
+
+// @keyframes progress-bar-primary-translate {
+//   0% {
+//     transform: translateX(0);
+//   }
+//   20% {
+//       transform: translateX(0);
+//   }
+//   59.15% {
+//       transform: translateX(83.67142%);
+//   }
+//   100% {
+//       transform: translateX(200.611057%);
+//   }
+// }
+
+// @keyframes progress-bar-primary-scale {
+//   0% {
+//     transform: scaleX(.08);
+//   }
+
+//   36.65% {
+//       transform: scaleX(.08);
+//   }
+//   69.15% {
+//       transform: scaleX(.661479);
+//   }
+//   100% {
+//       transform: scaleX(.08);
+//   }
+// }
+
+// @keyframes progress-bar-secondary-translate {
+//   0% {
+//     transform: translateX(0);
+//   }
+//   25% {
+//       transform: translateX(37.651913%);
+//   }
+//   48.35% {
+//       transform: translateX(84.386165%);
+//   }
+//   100% {
+//       transform: translateX(160.277782%);
+//   }
+// }
+
+// @keyframes progress-bar-secondary-scale {
+//   0% {
+//     transform: scaleX(.08);
+//   }
+//   19.15% {
+//       transform: scaleX(.457104);
+//   }
+//   44.15% {
+//       transform: scaleX(.72796);
+//   }
+//   100% {
+//       transform: scaleX(.08);
+//   }
+// }
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-circle {
+  0% {
+    stroke-dashoffset: 268.606171575px;
+    transform: rotate(0);
+  }
+  12.5% {
+      stroke-dashoffset: 56.5486677px;
+      transform: rotate(0);
+  }
+  12.5001% {
+      stroke-dashoffset: 56.5486677px;
+      transform: rotateX(180deg) rotate(72.5deg);
+  }
+  25% {
+      stroke-dashoffset: 268.606171575px;
+      transform: rotateX(180deg) rotate(72.5deg);
+  }
+  25.0001% {
+      stroke-dashoffset: 268.606171575px;
+      transform: rotate(270deg);
+  }
+  37.5% {
+      stroke-dashoffset: 56.5486677px;
+      transform: rotate(270deg);
+  }
+  37.5001% {
+      stroke-dashoffset: 56.5486677px;
+      transform: rotateX(180deg) rotate(161.5deg);
+  }
+  50% {
+      stroke-dashoffset: 268.606171575px;
+      transform: rotateX(180deg) rotate(161.5deg);
+  }
+  50.0001% {
+      stroke-dashoffset: 268.606171575px;
+      transform: rotate(180deg);
+  }
+  62.5% {
+      stroke-dashoffset: 56.5486677px;
+      transform: rotate(180deg);
+  }
+  62.5001% {
+      stroke-dashoffset: 56.5486677px;
+      transform: rotateX(180deg) rotate(251.5deg);
+  }
+  75% {
+      stroke-dashoffset: 268.606171575px;
+      transform: rotateX(180deg) rotate(251.5deg);
+  }
+  75.0001% {
+      stroke-dashoffset: 268.606171575px;
+      transform: rotate(90deg);
+  }
+  87.5% {
+      stroke-dashoffset: 56.5486677px;
+      transform: rotate(90deg);
+  }
+  87.5001% {
+      stroke-dashoffset: 56.5486677px;
+      transform: rotateX(180deg) rotate(341.5deg);
+  }
+  100% {
+      stroke-dashoffset: 268.606171575px;
+      transform: rotateX(180deg) rotate(341.5deg);
+  }
+}
+
+.loading-container {
+  @include size(100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: var('app-background');
+  opacity: 0;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 250ms;
+  transition-property: opacity, visibility;
+  will-change: opacity;
+  @at-root .loading-iframe & {
+    visibility: visible;
+    opacity: 0.8;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 250ms;
+    transition-property: opacity, visibility;
+  }
+}
+
+.spinner {
+  @include size(100px);
+  position: absolute;
+  display: block;
+  animation: spinner 2000ms linear infinite;
+  .spinner-svg {
+    @include size(100px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    transform: rotate(-90deg);
+    transform-origin: center;
+  }
+  .spinner-svg-circle {
+    transition: stroke-dashoffset 225ms linear;
+    transition-property: stroke;
+    transform-origin: center;
+    animation-name: spinner-circle;
+    animation-duration: 4000ms;
+    animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+    animation-iteration-count: infinite;
+    fill: transparent;
+    stroke: color('primary-6');
+    stroke-dasharray: 282.743px;
+    stroke-width: 10%;
+  }
+}

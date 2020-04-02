@@ -1,0 +1,182 @@
+/*/ ==========================================================================
+///  CONFIG
+///  ==========================================================================
+///  Used for generating the base configuration CSS variables.
+///  Everything used in the maps below is output to :root CSS variables
+///  in the form of var(--key-key-key-key)
+///  i.e. var(--color-primary-1) and var(--color-tint-1) below.
+/*/
+
+
+/*/
+///  Colors
+///  ~~~~~~~~~~~~~~~~~~~~~~
+///  Base color palette used throughout the app, in HSL form
+/*/
+
+$colors: (
+  'color': (
+    // Primary colors
+    'primary': (
+      // By default, changing the primary
+      // `h`, `s`, or `l` values will change 
+      // `primary`, `tint`, and `complement` colors
+      'hue': 174,
+      'saturation': 40%,
+      'lightness': 0%,
+      // ----
+      '1': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 8%)', // #0f0e11 // rgb(15, 14, 17)
+      '2': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 16%)', // #18141f // rgb(24, 20, 31)
+      '3': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 22%)', // #211c2b // rgb(33, 28, 43)
+      '4': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 30%)', // #2e2541 // rgb(46, 37, 65)
+      '5': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 38%)', // #3d2e5c // rgb(61, 46, 92)
+      '6': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 45%)', // #4c3380 // rgb(76, 51, 128)
+      '7': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 53%)', // #6241a4 // rgb(98, 65, 164)
+      '8': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 61%)', // #7c5bbe // rgb(124, 91, 190)
+      '9': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 68%)', // #997fcc // rgb(153, 127, 204)
+      '10': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 76%)', // #b09dd8 // rgb(176, 157, 216)
+      '11': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 84%)', // #c5b6e2 // rgb(197, 182, 226)
+      '12': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 92%)', // #d6cceb // rgb(214, 204, 235)
+      '13': '#{var('color-primary-hue')}, #{var('color-primary-saturation')}, calc(#{var('color-primary-lightness')} + 100%)' // #a575ff // rgb(165, 117, 255)
+    ),
+    // Tint (Secondary) colors
+    'tint': (
+      'hue': var('color-primary-hue'),
+      'saturation': calc(#{var('color-primary-saturation')} + 8%),
+      'lightness': var('color-primary-lightness'),
+      // ----
+      '1': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 10%)', // #18151e // rgb(24, 21, 30)
+      '2': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 14%)', // #221d2a // rgb(34, 29, 42)
+      '3': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 20%)', // #302a3c // rgb(48, 42, 60)
+      '4': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 27%)', // #413851 // rgb(65, 56, 81)
+      '5': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 35%)', // #544969 // rgb(84, 73, 105)
+      '6': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 44%)', // #695c84 // rgb(105, 92, 132)
+      '7': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 55%)', // #8578a1 // rgb(133, 120, 161)
+      '8': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 65%)', // #a096b6 // rgb(160, 150, 182)
+      '9': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 73%)', // #b6aec7 // rgb(182, 174, 199)
+      '10': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 80%)', // #c9c3d5 // rgb(201, 195, 213)
+      '11': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 86%)', // #d9d5e2 // rgb(217, 213, 226)
+      '12': '#{var('color-tint-hue')}, #{var('color-tint-saturation')}, calc(#{var('color-tint-lightness')} + 90%)' // #e4e1ea // rgb(228, 225, 234)
+    ),
+    // Complement colors
+    // NOTE:
+    // ----
+    // These are not actually used in default Twitchcord,
+    // but are still calculated/generated here for theme
+    // developers to potentially use.
+    'complement': (
+      'hue': calc(#{var('color-primary-hue')} + 180),
+      'saturation': var('color-primary-saturation'),
+      'lightness': var('color-primary-lightness'),
+      // ----
+      '1': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 10%), calc(#{var('color-complement-lightness')} + 6%)',
+      '2': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 22%), calc(#{var('color-complement-lightness')} + 10%)',
+      '3': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 21%), calc(#{var('color-complement-lightness')} + 14%)',
+      '4': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 27%), calc(#{var('color-complement-lightness')} + 20%)',
+      '5': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 33%), calc(#{var('color-complement-lightness')} + 27%)',
+      '6': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 43%), calc(#{var('color-complement-lightness')} + 35%)',
+      '7': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 43%), calc(#{var('color-complement-lightness')} + 45%)',
+      '8': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 43%), calc(#{var('color-complement-lightness')} + 55%)',
+      '9': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 43%), calc(#{var('color-complement-lightness')} + 65%)',
+      '10': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 43%), calc(#{var('color-complement-lightness')} + 73%)',
+      '11': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 43%), calc(#{var('color-complement-lightness')} + 80%)',
+      '12': '#{var('color-complement-hue')}, calc(#{var('color-complement-saturation')} + 44%), calc(#{var('color-complement-lightness')} + 86%)'
+    ),
+    // Constant colors
+    'black': '0, 0%, 0%', // #000 // rgb(0, 0, 0)
+    'blue': '210, 100%, 54%', // #00aeff // rgb(20, 136, 255)
+    'gold': '42, 100%, 50%', // #ffb300 // rgb(255, 179, 0)
+    'gray': '0, 0%, 55%', // #8c8c8c // rgb(140, 140, 140)
+    'green': '150, 80%, 40%', // #14b866 // rgb(20, 184, 102)
+    'orange': '14, 100%, 57%', // #ff5724 // rgb(255, 87, 36)
+    'purple': '261, 100%, 73%', // #a373ff // rgb(163, 115, 255)
+    'red': '0, 85%, 50%', // #ec1313 // rgb(236, 19, 19)
+    'white': '0, 0%, 100%', // #fff // rgb(255, 255, 255)
+    'yellow': '55, 100%, 50%', // #ffea00 // rgb(255, 234, 0)
+    // Contrasted color - should be light on dark theme
+    // and light on dark theme
+    'contrasted': var('color-white'),
+    // Helper colors
+    'danger': var('color-red'),
+    'info': var('color-purple'),
+    'success': var('color-green'),
+    'warn': var('color-gold'),
+    // Status colors
+    'status': (
+      'online': var('color-green'),
+      'dnd': var('color-red'),
+      'idle': var('color-gold'),
+      'streaming': var('color-purple'),
+      'offline': var('color-gray')
+    ),
+    // External brand colors
+    'battle-net': '200, 100%, 40%', // #008ace // rgb(0, 138, 206)
+    'discord': '227, 58%, 65%', // #7289da // rgb(114, 137, 218)
+    'facebook': '221, 44%, 41%', // #3b5998 // rgb(59, 89, 152)
+    'github': '210, 12%, 16%', // #24292e // rgb(36, 41, 46)
+    'league-of-legends': '181, 90%, 36%', // #09abae // rgb(9, 171, 174)
+    'reddit': '16, 100%, 50%', // #ff4500 // rgb(255, 69, 0)
+    'skype': '196, 100%, 47%', // #00aff0 // rgb(0, 175, 240)
+    'spotify': '141, 73%, 42%', // #1db954 // rgb(29, 185, 84)
+    'steam': '20, 3%, 23%', // #3b3938 // rgb(59, 57, 56)
+    'twitch': '261, 43%, 45%', // #6441a5 // rgb(100, 65, 165)
+    'twitter': '203, 89%, 53%', // #1da1f2 // rgb(29, 161, 242)
+    'xbox': '112, 45%, 48%', // #52b043 // rgb(82, 176, 67)
+    'youtube': '0, 74%, 46%' // #cd201f // rgb(205, 32, 31)
+  )
+); 
+
+
+/*/
+///  Icons [SVG]
+///  ~~~~~~~~~~~~~~~~~~~~~~
+///  All SVG icons used throughout the app.
+///  The names are added to the list below,
+///  and the actual SVG is placed in an `svg`
+///  folder directory with the same name. Then we
+///  create a map with this info and encode the SVG
+///  data using the `node-sass-svg` package and then
+///  store them in CSS variables.
+/*/
+
+// SVG icon list
+$icon-list: (
+  'arrow-up',
+  'attachment',
+  'clipboard',
+  'close',
+  'dark-mode',
+  'github',
+  'light-mode',
+  'link',
+  'paint-brush',
+  'palette',
+  'sad-dead',
+  'star'
+);
+
+// In the same process we use for badges and logos,
+// let's make a list and make a map out of it, and then
+// set its key-value pairs, so we can merge it below with the other
+// maps to generate CSS variables out of it
+
+$icons: ();
+
+@each $icon in $icon-list {
+  $icons: non-destructive-map-merge(
+    $icons,
+    (
+      'icon': (
+        '#{$icon}': '#{svg('icon', '#{$icon}\.svg')}'
+      )
+    )
+  );
+}
+
+// Generating CSS variables from maps . . .
+:root {
+  @include generate-css-vars(map-merge-all(
+    $colors,
+    $icons
+  ));
+}

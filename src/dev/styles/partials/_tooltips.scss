@@ -1,0 +1,191 @@
+:root {
+  --tooltip-background: rgba(97, 97, 97, 0.9);
+  --tooltip-transition-duration: .15s;
+  --tooltip-transition-delay: .075s;
+  --tooltip-transition-easing: ease;
+  --tooltip-font-size: 11px;
+  --tooltip-font-weight: 400;
+  --tooltip-text-transform: none;
+  --tooltip-border-radius: 4px;
+  &.light-mode {
+    --tooltip-background: rgba(40, 40, 40, 0.9);
+  }
+}
+
+[aria-label][role~='tooltip'] {
+  position: relative;
+}
+
+[aria-label][role~='tooltip']::after {
+  position: absolute;
+  z-index: 10;
+  box-sizing: border-box;
+  pointer-events: none;
+  opacity: 0;
+  transition: all var(--tooltip-transition-duration, .18s) var(--tooltip-transition-easing, ease-in-out) var(--tooltip-transition-delay, 0s);
+  transform: translate3d(0, 0, 0);
+  transform: translateX(-50%) scale(0);
+  transform-origin: center top;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+[aria-label][role~='tooltip']::after {
+  content: attr(aria-label);
+  box-sizing: content-box;
+  padding: 6px 8px;
+  font-size: var(--tooltip-font-size, 13px);
+  font-weight: var(--tooltip-font-weight, normal);
+  color: #ffffff;
+  text-transform: var(--tooltip-text-transform, none);
+  white-space: nowrap;
+  background: var(--tooltip-background);
+  border-radius: var(--tooltip-border-radius);
+}
+
+[aria-label][role~='tooltip']:hover::after,
+[aria-label][role~='tooltip']:focus::after {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(-50%) scale(.99);
+}
+
+
+
+/* ------------------------------------------------
+  [2] Position Modifiers
+-------------------------------------------------*/
+
+[role~='tooltip'][data-tooltip-position|='top']::after {
+  margin-bottom: 10px;
+}
+
+[role~='tooltip'][data-tooltip-position|='top']::after {
+  bottom: 100%;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+
+[role~='tooltip'][data-tooltip-position='top']:hover::after {
+  transform: translate3d(-50%, -5px, 0);
+}
+
+/* ------------------------------------------------
+  [2.1] Top Left
+-------------------------------------------------*/
+[role~='tooltip'][data-tooltip-position='top-left']::after {
+  bottom: 100%;
+  transform: translate3d(calc(-100% + 16px), 0, 0);
+}
+
+[role~='tooltip'][data-tooltip-position='top-left']:hover::after {
+  transform: translate3d(calc(-100% + 16px), -5px, 0);
+}
+
+
+/* ------------------------------------------------
+  [2.2] Top Right
+-------------------------------------------------*/
+[role~='tooltip'][data-tooltip-position='top-right']::after {
+  bottom: 100%;
+  transform: translate3d(calc(0% + -16px), 0, 0);
+}
+
+[role~='tooltip'][data-tooltip-position='top-right']:hover::after {
+  transform: translate3d(calc(0% + -16px), -5px, 0);
+}
+
+
+/* ------------------------------------------------
+  [2.3] Bottom
+-------------------------------------------------*/
+[role~='tooltip'][data-tooltip-position|='bottom']::after {
+  margin-top: 10px;
+}
+
+[role~='tooltip'][data-tooltip-position|='bottom']::after {
+  top: 100%;
+  left: 50%;
+}
+
+[role~='tooltip'][data-tooltip-position='bottom-left']:hover::after {
+  transform: translate3d(calc(-100% + 16px), 0, 0) scale(.99);
+}
+
+
+/* ------------------------------------------------
+  [2.5] Bottom Right
+-------------------------------------------------*/
+[role~='tooltip'][data-tooltip-position='bottom-right']::after {
+  top: 100%;
+  transform: translate3d(calc(0% + -16px), -10px, 0);
+}
+
+[role~='tooltip'][data-tooltip-position='bottom-right']:hover::after {
+  transform: translate3d(calc(0% + -16px), 0, 0);
+}
+
+
+/* ------------------------------------------------
+  [2.6] Left
+-------------------------------------------------*/
+[role~='tooltip'][data-tooltip-position='left']::after {
+  margin-right: 10px;
+}
+
+[role~='tooltip'][data-tooltip-position='left']:hover::after {
+  transform: translate3d(0, -50%, 0);
+}
+
+
+/* ------------------------------------------------
+  [2.7] Right
+-------------------------------------------------*/
+[role~='tooltip'][data-tooltip-position='right']::after {
+  top: 50%;
+  bottom: auto;
+  left: 100%;
+  transform: translate3d(-10px, -50%, 0);
+}
+
+[role~='tooltip'][data-tooltip-position='right']::after {
+  margin-left: 10px;
+}
+
+[role~='tooltip'][data-tooltip-position='right']:hover::after {
+  transform: translate3d(0, -50%, 0);
+}
+
+/* ------------------------------------------------
+  [3] Size
+-------------------------------------------------*/
+[role~='tooltip'][data-tooltip-size='small']::after {
+  width: 80px;
+  white-space: initial;
+}
+
+[role~='tooltip'][data-tooltip-size='medium']::after {
+  width: 150px;
+  white-space: initial;
+}
+
+[role~='tooltip'][data-tooltip-size='large']::after {
+  width: 260px;
+  white-space: initial;
+}
+
+// Fix to hide the tooltip when the nav slides up
+.switching-theme-mode {
+  [role~='tooltip']::after {
+    display: none;
+  }
+}
+
+// Hack to change the tooltip text based on light / dark mode
+[aria-label='Switch theme mode']::after {
+  content: 'Switch to light mode' !important;
+  @at-root .light-mode & {
+    content: 'Switch to dark mode' !important;
+  }
+}

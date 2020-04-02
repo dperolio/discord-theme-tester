@@ -1,0 +1,69 @@
+.contextmenu-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+}
+.contextmenu-container .box {
+	box-sizing: border-box;
+	background: #FFF;
+	border-radius: 2px;
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.6), 0px 0px 0px 1px rgba(0, 0, 0, 0.15);
+}
+.contextmenu-container .box li {
+	padding: 3px 0px;
+	overflow: hidden;
+	font-size: 14px;
+	color: #4f4f4f;
+	cursor: default;
+	border-bottom: 1px solid #d1d1d1;
+	box-shadow: none;
+}
+.contextmenu-container .box li:first-child {
+	border-radius: 3px 3px 0 0;
+}
+.contextmenu-container .box li:last-child {
+	border-bottom: none;
+	border-radius: 0 0 3px 3px;
+}
+.contextmenu-container .box li span.infos {
+	display: block;
+	margin-top: -3px;
+	margin-bottom: -3px;
+	padding: 6px 12px;
+	font-size: 12px;
+	color: #808080;
+	text-align: center;
+	background-color: #ebebeb;
+}
+.contextmenu-container .box li span.contextmenu-btn {
+	display: block;
+	padding: 4px 10px;
+	cursor: pointer;
+}
+.contextmenu-container .box li span.contextmenu-btn:hover {
+	color: white;
+	background: #0086c1;
+}
+.contextmenu-container .box li span .contextmenu-arrow-sub {
+    display: block;
+	float: right;
+    width: 0;
+    height: 0;
+    margin: 3px -10px 0 10px;
+    border: 5px solid transparent;
+    border-right: 9px solid transparent;
+    border-left: 8px solid black;
+    opacity: .7;
+}
+.contextmenu-container .box li span:hover .contextmenu-arrow-sub {
+	border-left: 8px solid white;
+	opacity: 1;
+}
+.contextmenu-arrow {
+	position: absolute;
+	left: 50%;
+}
+li {
+	list-style: none;
+}

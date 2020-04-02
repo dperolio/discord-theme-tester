@@ -1,0 +1,35 @@
+{
+  "name": "vizality-theme-tester",
+  "version": "0.0.1",
+  "description": "Test your Discord theme on different versions of Discord.",
+  "main": "js/main.js",
+  "scripts": {
+    "watch-sass": "node src/dev/scripts/watch-sass.js",
+    "minify-js": "node src/dev/scripts/minify-js.js",
+    "minify-babel": "node src/dev/scripts/minify-babel.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vizality/vizality.github.io.git"
+  },
+  "author": "dperolio",
+  "bugs": {
+    "url": "https://github.com/vizality/vizality.github.io/issues"
+  },
+  "homepage": "https://www.vizality.com/theme-tester",
+  "dependencies": {
+    "@node-minify/babel-minify": "^5.3.0",
+    "@node-minify/core": "^5.3.0",
+    "btoa": "^1.2.1",
+    "lodash": "^4.17.15",
+    "node-minify": "^3.6.0",
+    "node-sass": "^4.13.1",
+    "node-sass-svg": "^1.1.1",
+    "stylelint": "^12.0.0",
+    "stylelint-order": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "babel-preset-minify": "^0.5.1"
+  }
+}

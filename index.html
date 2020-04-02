@@ -1,14 +1,428 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" theme-color="teal">
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
+  <title>Vizality's Discord Theme Tester</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Pie is good</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <meta name="theme-style" content="vizality">
 </head>
 
 <body>
-   <div>I like pie a lot.</div>>
+  <div class="app-container">
+    <nav class="main-nav">
+      <a class="main-nav-logo-wrapper" href="index.html">
+        <div class="main-nav-logo-background"></div>
+        <div class="main-nav-logo">
+          <div class="icon-container" aria-label="Beta" data-tooltip-position="bottom" role="tooltip">
+            <div class="icon-container-inner">
+              <icon class="icon star"></icon>
+            </div>
+          </div>
+        </div>
+      </a>
+      <div class="main-nav-section-left">
+        <div class="item-group">
+          <div class="flex-group">
+            <div class="icon-container" aria-label="Import CSS theme from a link" id="from-the-web-2" data-tooltip-position="bottom" data-modal-open="modal" role="tooltip">
+              <div class="icon-container-inner">
+                <icon class="icon link"></icon>
+              </div>
+            </div>
+            <div class="icon-container" aria-label="Import CSS theme from a file" id="from-your-computer-2" data-tooltip-position="bottom" data-modal-open="modal" role="tooltip">
+              <div class="icon-container-inner">
+                <icon class="icon attachment"></icon>
+              </div>
+            </div>
+            <div class="button-container">
+              <button class="button primary mobile" id="from-the-web" data-modal-open="modal" role="button">
+                <span>Import CSS from URL</span>
+                <icon class="icon link"></icon>
+              </button>
+            </div>
+            <div class="button-container">
+              <button class="button secondary mobile" id="from-your-computer" data-modal-open="modal" role="button">
+                <span>Import CSS from file</span>
+                <icon class="icon attachment"></icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="item-group">
+          <div class="select-container">
+            <input id="view-options" class="select-input" type="checkbox" name="checkbox" checked />
+            <label for="view-options" class="select-label">
+              <div class="select-option-selected">
+                <span class="select-option-selected-text">View</span>
+                <span class="select-option-selected-arrow"></span>
+              </div>
+              <ul class="select-options view-options">
+                <li class="select-option select-nested-option">
+                  <span class="select-option-span">Views</span>
+                  <span class="select-option-arrow"></span>
+                  <ul class="select-options select-nested-options">
+                    <li class="select-option">
+                      <span class="select-option-span">Crash</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Direct Message</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Friends</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Login</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">NSFW Channel</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">No Channels</span>
+                    </li>
+                    <li class="select-option current">
+                      <span class="select-option-span">Server</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Server Discovery</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Startup</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Store Page</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">User Settings</span>
+                    </li>
+                  </ul>
+                </li>
+                <li class="select-option select-nested-option">
+                  <span class="select-option-span">Popouts</span>
+                  <span class="select-option-arrow"></span>
+                  <ul class="select-options select-nested-options">
+                    <li class="select-option">
+                      <span class="select-option-span">Add Friends to DM</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Add Roles</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Autocomplete</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Emoji Picker</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">GIF Picker</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Pinned Messages</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Recent Mentions</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Search</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Server Settings</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Status Picker</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">User</span>
+                    </li>
+                  </ul>
+                </li>
+                <li class="select-option select-nested-option">
+                  <span class="select-option-span">Modals</span>
+                  <span class="select-option-arrow"></span>
+                  <ul class="select-options select-nested-options">
+                    <li class="select-option">
+                      <span class="select-option-span">Change Log</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Custom Status</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Drag & Drop</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Image</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Join/Create Server</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Keyboard Shortcuts</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Phone Verification</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Quickswitcher</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Server Invite</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Server Join Splash</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">Upload</span>
+                    </li>
+                    <li class="select-option">
+                      <span class="select-option-span">User</span>
+                    </li>
+                  </ul>
+                </li>
+                <li class="select-option select-nested-option">
+                  <span class="select-option-span">Components</span>
+                  <span class="select-option-arrow"></span>
+                  <ul class="select-options select-nested-options">
+                    <li class="select-option disabled">
+                      <span class="select-option-span">Alerts</span>
+                    </li>
+                    <li class="select-option disabled">
+                      <span class="select-option-span">Buttons</span>
+                    </li>
+                    <li class="select-option disabled">
+                      <span class="select-option-span">Color Pickers</span>
+                    </li>
+                    <li class="select-option disabled">
+                      <span class="select-option-span">Context Menus</span>
+                    </li>
+                    <li class="select-option disabled">
+                      <span class="select-option-span">Datepickers</span>
+                    </li>
+                    <li class="select-option disabled">
+                      <span class="select-option-span">Inputs</span>
+                    </li>
+                    <li class="select-option disabled">
+                      <span class="select-option-span">Notices</span>
+                    </li>
+                    <li class="select-option disabled">
+                      <span class="select-option-span">Tooltips</span>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </label>
+          </div>
+        </div>
+        <div class="item-group">
+          <div class="select-container">
+            <input id="discord-build" class="select-input" type="checkbox" name="checkbox" checked />
+            <label for="discord-build" class="select-label">
+              <div class="select-option-selected">
+                <span class="select-option-selected-text">Build</span>
+                <span class="select-option-selected-arrow"></span>
+              </div>
+                <ul class="select-options discord-build">
+                  <li class="select-option current">
+                    <span class="select-option-span">57177</span>
+                  </li>
+                  <li class="select-option">
+                    <span class="select-option-span">666</span>
+                  </li>
+                </ul>
+            </label>
+          </div>
+        </div>
+        <div class="item-group">
+          <div class="select-container">
+            <input id="settings-options" class="select-input" type="checkbox" name="checkbox" checked />
+            <label for="settings-options" class="select-label">
+              <div class="select-option-selected">
+                <span class="select-option-selected-text">Settings</span>
+                <span class="select-option-selected-arrow"></span>
+              </div>
+              <ul class="select-options settings-options">
+                <li class="select-option select-nested-option">
+                  <span class="select-option-span">Vizality</span>
+                  <span class="select-option-arrow"></span>
+                  <ul class="select-options select-nested-options">
+                    <li class="select-option-switch disabled">
+                      <label for="vizality-base" class="label-text">Vizality base</label>
+                      <div class="switch-container">
+                        <input name="vizality-base" id="vizality-base" class="switch" disabled type="checkbox">
+                      </div>
+                    </li>
+                    <li class="select-option-switch disabled">
+                      <label for="vizality-dark-mode" class="label-text">Dark mode</label>
+                      <div class="switch-container switch-enabled">
+                        <input name="vizality-dark-mode" id="vizality-dark-mode" class="switch" disabled type="checkbox" checked>
+                      </div>
+                    </li>
+                    <li class="select-option-switch disabled">
+                      <label for="vizality-compact-mode" class="label-text">Compact mode</label>
+                      <div class="switch-container">
+                        <input name="vizality-compact-mode" id="vizality-compact-mode" class="switch" disabled type="checkbox">
+                      </div>
+                    </li>
+                    <li class="select-option-switch disabled">
+                      <label for="vizality-forum-mode" class="label-text">Forum mode</label>
+                      <div class="switch-container">
+                        <input name="vizality-forum-mode" id="vizality-forum-mode" class="switch" disabled type="checkbox">
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li class="select-option select-nested-option">
+                  <span class="select-option-span">Discord</span>
+                  <span class="select-option-arrow"></span>
+                  <ul class="select-options select-nested-options">
+                    <li class="select-option-switch">
+                      <label for="discord-dark-mode" class="label-text">Dark mode</label>
+                      <div class="switch-container switch-enabled">
+                        <input name="discord-dark-mode" id="discord-dark-mode" class="switch" type="checkbox" checked>
+                      </div>
+                    </li>
+                    <li class="select-option-switch disabled">
+                      <label for="discord-dark-sidebar" class="label-text">Dark sidebar</label>
+                      <div class="switch-container">
+                        <input name="discord-dark-sidebar" id="discord-dark-sidebar" class="switch" disabled type="checkbox">
+                      </div>
+                    </li>
+                    <li class="select-option-switch">
+                      <label for="discord-compact-mode" class="label-text">Compact mode</label>
+                      <div class="switch-container">
+                        <input name="discord-compact-mode" id="discord-compact-mode" class="switch" type="checkbox">
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="main-nav-section-right">
+        <div class="select-container">
+          <input id="palette-options" class="select-input" type="checkbox" name="checkbox" checked />
+          <label for="palette-options">
+            <div class="select-option-selected">
+              <div class="icon-container" aria-label="Choose a different color scheme" data-tooltip-position="bottom"
+              role="tooltip">
+              <div class="icon-container-inner">
+                <icon class="icon paint-brush"></icon>
+              </div>
+            </div>
+            </div>
+            <ul class="select-options palette-options">
+              <li class="select-option">
+                <span class="select-option-span red"></span>
+              </li>
+              <li class="select-option">
+                <span class="select-option-span orange"></span>
+              </li>
+              <li class="select-option">
+                <span class="select-option-span lime"></span>
+              </li>
+              <li class="select-option">
+                <span class="select-option-span green"></span>
+              </li>
+              <li class="select-option current">
+                <span class="select-option-span teal"></span>
+              </li>
+              <li class="select-option">
+                <span class="select-option-span blue"></span>
+              </li>
+              <li class="select-option">
+                <span class="select-option-span indigo"></span>
+              </li>
+              <li class="select-option">
+                <span class="select-option-span purple"></span>
+              </li>
+              <li class="select-option">
+                <span class="select-option-span magenta"></span>
+              </li>
+            </ul>
+          </label>
+        </div>
+        <div class="icon-container" aria-label="Switch theme mode" data-tooltip-position="bottom"
+          role="tooltip">
+          <div class="icon-container-inner">
+            <icon class="icon light-mode"></icon>
+          </div>
+        </div>
+        <div class="icon-container" aria-label="Github repository" data-tooltip-position="bottom" role="tooltip">
+          <div class="icon-container-inner">
+            <a href="https://github.com/vizality/vizality.github.io/theme-tester">
+              <icon class="icon github"></icon>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="main-nav-hider">
+        <div class="icon-container">
+          <div class="icon-container-inner">
+            <icon class="icon caret-up"></icon>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div id="iframe-container" class="iframe-container">
+      <div class="loading-text">Loading</div>
+      <div class="loading-container">
+        <div class="spinner">
+          <svg viewBox="0 0 100 100" class="spinner-svg">
+            <circle cx="50%" cy="50%" r="45" class="spinner-svg-circle"></circle>
+          </svg>
+        </div>
+      </div>
+      <div class="iframe-uhoh">
+        <div class="icon-container">
+          <icon class="icon sad-dead"></icon>
+        </div>
+        <div class="flex-group">
+          <h1 class="iframe-uhoh-header">Uh-oh.</h1>
+          <div class="iframe-uhoh-text">It looks like we weren't able to load the selected view on the selected build. Please try a different view or a different build.</div>
+        </div>
+      </div>
+      <!-- <div class="progress-bar-container">
+        <div class="progress-bar-buffer"></div>
+        <div class="progress-bar primary">
+          <span class="progress-bar-inner"></span>
+        </div>
+        <div class="progress-bar secondary">
+          <span class="progress-bar-inner"></span>
+        </div>
+      </div> -->
+      <iframe id="theme-preview" src="preview/base.html" data-build="57177" data-directory="views" data-view="server"></iframe>
+    </div>
+  </div>
+
+  <div class="modal micromodal-slide" id="modal" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-modal-close></div>
+    <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <header class="modal__header">
+        <h2 class="modal__title" id="modal-title">Import CSS from URL</h2>
+      </header>
+      <main class="modal__content" id="modal-content">
+      </main>
+      <footer class="modal__footer">
+        <div class="button-container blank">
+          <button class="button blank" role="button" data-modal-close>Cancel</button>
+        </div>
+        <div class="button-container blank">
+          <button id="submit" class="button blank" role="button" data-modal-close>Import</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="assets/js/main.min.js"></script>
+
 </body>
 
 </html>

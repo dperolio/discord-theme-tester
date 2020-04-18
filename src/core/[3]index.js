@@ -12,7 +12,7 @@ async function updateIframeContent({build, directory, view} = {}) {
 
   if (build) {
     iframe.dataset.build = build;
-    iframe.contentWindow.document.querySelector('#discord-css').href = `${build}/default.css`;
+    iframe.contentWindow.document.querySelector('#discord-css').href = `${build}/styles.css`;
     console.log(iframe.contentWindow.document.querySelector('#discord-css').href);
   }
   if (directory) iframe.dataset.directory = directory;
@@ -575,6 +575,7 @@ function discordCompactMode() {
         option.classList.add('current');
       } else {
         option.classList.add('disabled');
+        option.classList.remove('current');
       }
     }
     iframe.dataset.compact = 'true';

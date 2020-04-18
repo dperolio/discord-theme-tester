@@ -5,8 +5,7 @@
   "main": "js/main.js",
   "scripts": {
     "watch-sass": "node src/dev/scripts/watch-sass.js",
-    "minify-js": "node src/dev/scripts/minify-js.js",
-    "minify-babel": "node src/dev/scripts/minify-babel.js"
+    "minify-js": "node src/dev/scripts/minify-js.js"
   },
   "repository": {
     "type": "git",

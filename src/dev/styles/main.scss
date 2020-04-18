@@ -268,17 +268,17 @@ body {
   justify-content: center;
   height: 74px;
   overflow: hidden;
-  &:hover {
-    .main-nav-logo-background {
-      background: var('main-nav-logo-hover-background');
-    }
-    .icon-container {
-      background: var('main-nav-logo-hover-background');
-    }
-  }
+  // &:hover {
+  //   .main-nav-logo-background {
+  //     background: var('main-nav-logo-hover-background');
+  //   }
+  //   .icon-container {
+  //     background: var('main-nav-logo-hover-background');
+  //   }
+  // }
   .main-nav-logo {
     position: relative;
-    left: 10px;
+    left: 20px;
     display: block;
     width: 113px;
     height: 40px;
@@ -294,29 +294,29 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var('main-nav-logo-background');
+    background: var('main-nav-background');
     border-radius: 50%;
     transition: background 280ms cubic-bezier(0.4, 0, 0.2, 1);
     .icon-container-inner {
       @include size(16px);
-      background: color('complement-6');
+      background: color('primary-4');
       .icon {
         @include size(12px);
         background-color: #fff;
       }
     }
   }
-  .main-nav-logo-background {
-    position: absolute;
-    top: -100%;
-    left: -23px;
-    width: 106px;
-    height: 300%;
-    background: var('main-nav-logo-background');
-    box-shadow: 0 0 0 5px var('app-background');
-    transition: background 280ms cubic-bezier(0.4, 0, 0.2, 1);
-    transform: rotate(25deg);
-  }
+  // .main-nav-logo-background {
+  //   position: absolute;
+  //   top: -100%;
+  //   left: -23px;
+  //   width: 106px;
+  //   height: 300%;
+  //   background: var('main-nav-logo-background');
+  //   box-shadow: 0 0 0 5px var('app-background');
+  //   transition: background 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  //   transform: rotate(25deg);
+  // }
 }
 
 .switch-container {
@@ -842,7 +842,7 @@ body {
   }
   .main-nav {
     .main-nav-section-left {
-      margin-left: 20px;
+      margin-left: 10px;
     }
     .icon-container:first-of-type {
       &:hover {

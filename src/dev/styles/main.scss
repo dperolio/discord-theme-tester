@@ -300,6 +300,9 @@ body {
     .icon-container-inner {
       @include size(16px);
       background: color('primary-4');
+      @at-root .light-mode & {
+        background: color('primary-2');
+      }
       .icon {
         @include size(12px);
         background-color: #fff;
@@ -826,10 +829,6 @@ body {
         }
         + .icon-container {
           margin-left: 10px;
-          background: var('button-secondary-background');
-          &:hover {
-            background: var('button-secondary-hover-background');
-          }
         }
       }
     }

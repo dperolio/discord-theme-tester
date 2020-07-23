@@ -20,7 +20,7 @@
     "@node-minify/babel-minify": "^5.3.0",
     "@node-minify/core": "^5.3.0",
     "btoa": "^1.2.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "node-minify": "^3.6.0",
     "node-sass": "^4.13.1",
     "node-sass-svg": "^1.1.1",
